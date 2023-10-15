@@ -19,7 +19,7 @@ const CameraModule = (props) => {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       params: {
-        api_key: process.env.NEXT_PUBLIC_ROBOFLOW_KEY,
+        api_key: "qmlZKd3Jtkz7C4ggB3PD", //process.env.NEXT_PUBLIC_ROBOFLOW_KEY,
       },
       data: imgBlob,
     })
