@@ -32,7 +32,7 @@ function Demo1() {
       {/*
         isCaptured && <Modal cameraDetected={cameraDetected} reset={reset} />
       */}
-      {cameraDetected}
+      <div className="result">{cameraDetected}</div>
     </div>
   );
 }
