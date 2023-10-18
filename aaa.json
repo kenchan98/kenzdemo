@@ -1,0 +1,16 @@
+{
+  "detail": [
+    {
+      "loc": ["body", 1],
+      "msg": "Expecting value: line 1 column 2 (char 1)",
+      "type": "value_error.jsondecode",
+      "ctx": {
+        "msg": "Expecting value",
+        "doc": "[object Object]",
+        "pos": 1,
+        "lineno": 1,
+        "colno": 2
+      }
+    }
+  ]
+}
