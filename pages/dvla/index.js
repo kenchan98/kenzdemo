@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect, useContext } from "react";
 import Camera, { FACING_MODES } from "react-html5-camera-photo";
-import AppContext from "../AppContext";
 
 export default function checkNumberPlate() {
   //const appContext = useContext(AppContext);
