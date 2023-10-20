@@ -6,25 +6,16 @@ export default function checkNumberPlate() {
   //const appContext = useContext(AppContext);
   const [imgData, setImgData] = useState(null);
   const [plateNumber, setPlateNumber] = useState("");
+  const [registerDate, setRegisterDate] = useState("");
+  const [vehicleTaxStatus, setVehicleTaxStatus] = useState("");
+  const [make, setMake] = useState("");
+  const [colour, setColour] = useState("");
+  const [motExpiryDate, setMotExpiryDate] = useState("");
+  const [motStatus, setMotStatus] = useState("");
 
   useEffect(() => {
-    //console.log(appContext.vehicleData);
-
-    /*
-    const imagePathOnStorage = "images/numberPlate.png";
-    uploadToStorage(imgData, imagePathOnStorage).then((imgURL) => {
-      // once the image stored on Firebase has returned a full url
-      // send the link to the Rapid API for number plate detection
-      sendImageForNumberPlateDetection(imgURL);
-    });
-    */
-
     //request_VehicleCheck();
-
     //request_Platebber(imgData);
-
-    //request_DVLA();
-
     if (imgData) request_PlateRecognizer(imgData);
   }, [imgData]);
 
@@ -33,28 +24,53 @@ export default function checkNumberPlate() {
 
 
   */
+  /*
+    =============================================================
+    upload the image taken with the camera to firebase for storage
+ */
+  function uploadToFirebaseStorage() {
+    const imagePathOnStorage = "images/numberPlate.png";
+    uploadToStorage(imgData, imagePathOnStorage).then((imgURL) => {
+      // once the image stored on Firebase has returned a full url
+      // send the link to the Rapid API for number plate detection
+      sendImageForNumberPlateDetection(imgURL);
+    });
+  }
   /* 
-    =========================================
-    X X problem with CORS-ORIGIN at DVLA side 
-*/
-  function request_DVLA() {
-    var config = {
-      method: "post",
-      url: "https://driver-vehicle-licensing.api.gov.uk/vehicle-enquiry/v1/vehicles",
+    =================================
+    sending a request to local server
+    in turn to make a request at DVLA
+  */
+  function request_DVLA(plateNum) {
+    fetch("/api/dvla", {
+      method: "POST",
+      body: JSON.stringify({
+        plateNum: plateNum,
+      }),
       headers: {
-        //"x-api-key": "iZQWpDapjy4n4DoL9Ulzm25D68rlHPFS6u3KyEag",
-        "x-api-key": "HowYkRxFOQ196qWBr5H3AaqCzbcFWOgw82aB1N3M", //test server
         "Content-Type": "application/json",
       },
-      data: JSON.stringify({ registrationNumber: "GV62HKP" }),
-    };
-
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-      })
-      .catch(function (error) {
-        console.log(error);
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        console.log(JSON.parse(data.data));
+        const {
+          registrationNumber,
+          taxStatus,
+          monthOfFirstRegistration,
+          colour,
+          make,
+          motExpiryDate,
+          motStatus,
+        } = JSON.parse(data.data);
+        setPlateNumber(registrationNumber);
+        setRegisterDate(monthOfFirstRegistration);
+        setVehicleTaxStatus(taxStatus);
+        setMake(make);
+        setColour(colour);
+        setMotExpiryDate(motExpiryDate);
+        setMotStatus(motStatus);
       });
   }
   /*
@@ -153,7 +169,8 @@ export default function checkNumberPlate() {
         console.log(json);
         if (json.results.length > 0) {
           const plateNum = json.results[0].plate.toUpperCase();
-          setPlateNumber(plateNum);
+          //setPlateNumber(plateNum);
+          request_DVLA(plateNum);
         } else {
           setPlateNumber("No vehicle detected");
         }
@@ -180,7 +197,18 @@ export default function checkNumberPlate() {
           setImgData(dataUri);
         }}
       />
-      <div className="text-5xl p-10">{plateNumber}</div>
+      {plateNumber && (
+        <div>
+          <div className="text-5xl p-10">{plateNumber}</div>
+          <div className="text-2xl p-2">
+            {make} : {colour}
+          </div>
+          <div className="text-2xl p-2">Register Date : {registerDate}</div>
+          <div className="text-2xl p-2">Tax Status : {vehicleTaxStatus}</div>
+          <div className="text-2xl p-2">MOT Status : {motStatus}</div>
+          <div className="text-2xl p-2">MOT Expiry Date : {motExpiryDate}</div>
+        </div>
+      )}
     </div>
   );
 }
