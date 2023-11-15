@@ -3,9 +3,6 @@ import React, { useState, useEffect, useContext } from "react";
 import Camera, { FACING_MODES } from "react-html5-camera-photo";
 
 export default function checkNumberPlate() {
-  //const appContext = useContext(AppContext);
-  console.log("----------");
-  console.log(process.env.NEXT_PUBLIC_PLATE_RECOGNIZER_KEY);
   const [imgData, setImgData] = useState(null);
   const [plateNumber, setPlateNumber] = useState("");
   const [registerDate, setRegisterDate] = useState("");
@@ -18,8 +15,6 @@ export default function checkNumberPlate() {
   useEffect(() => {
     //request_VehicleCheck();
     //request_Platebber(imgData);
-    console.log("Use Effect called");
-    console.log("key", process.env.NEXT_PUBLIC_PLATE_RECOGNIZER_KEY);
     if (imgData) request_PlateRecognizer(imgData);
   }, [imgData]);
 
@@ -159,7 +154,10 @@ export default function checkNumberPlate() {
       send request to Plate Recognizer
   */
   function request_PlateRecognizer(imgData) {
-    console.log("KEY", process.env.NEXT_PUBLIC_PLATE_RECOGNIZER_KEY);
+    console.log(
+      "NEXT_PUBLIC_PLATE_RECOGNIZER_KEY ----> ",
+      process.env.NEXT_PUBLIC_PLATE_RECOGNIZER_KEY
+    );
     let body = new FormData(); //formdata object
     body.append("upload", imgData);
     fetch("https://api.platerecognizer.com/v1/plate-reader/", {
