@@ -186,7 +186,7 @@ export default function checkNumberPlate() {
 
   */
   return (
-    <div className="App">
+    <div className="App bg-blue-700">
       <Camera
         idealFacingMode={FACING_MODES.ENVIRONMENT}
         idealResolution={{ width: 320, height: 240 }}
@@ -200,7 +200,7 @@ export default function checkNumberPlate() {
         }}
       />
       {plateNumber && (
-        <div>
+        <div className="bg-yellow-300">
           <div className="text-5xl p-10">{plateNumber}</div>
           <div className="text-2xl p-2">
             {make} : {colour}
