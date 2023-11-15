@@ -3,8 +3,6 @@ import React, { useState, useEffect, useContext } from "react";
 import Camera, { FACING_MODES } from "react-html5-camera-photo";
 
 export default function checkNumberPlate() {
-  console.log("----------");
-  console.log(process.env.PLATE_RECOGNIZER_KEY);
   //const appContext = useContext(AppContext);
   const [imgData, setImgData] = useState(null);
   const [plateNumber, setPlateNumber] = useState("");
@@ -18,6 +16,8 @@ export default function checkNumberPlate() {
   useEffect(() => {
     //request_VehicleCheck();
     //request_Platebber(imgData);
+    console.log("----------");
+    console.log(process.env.NEXT_PUBLIC_PLATE_RECOGNIZER_KEY);
     if (imgData) request_PlateRecognizer(imgData);
   }, [imgData]);
 
@@ -156,13 +156,14 @@ export default function checkNumberPlate() {
       ===============================
       send request to Plate Recognizer
   */
-  function request_PlateRecognizer(imgData, secretKey) {
+  function request_PlateRecognizer(imgData) {
+    console.log("KEY", process.env.NEXT_PUBLIC_PLATE_RECOGNIZER_KEY);
     let body = new FormData(); //formdata object
     body.append("upload", imgData);
     fetch("https://api.platerecognizer.com/v1/plate-reader/", {
       method: "POST",
       headers: {
-        Authorization: `Token ${process.env.NEXT_PUBLIC_PLATE_RECOGNIZER_KEY}`, //925de5e38a4e63269810ab02ec9fb9165054ef85 //ea0bf1239544fa0659cf6518052918dab10bac32",
+        Authorization: `Token ${process.env.NEXT_PUBLIC_PLATE_RECOGNIZER_KEY}`,
       },
       body: body,
     })
