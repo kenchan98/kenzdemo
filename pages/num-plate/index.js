@@ -4,6 +4,8 @@ import Camera, { FACING_MODES } from "react-html5-camera-photo";
 
 export default function checkNumberPlate() {
   //const appContext = useContext(AppContext);
+  console.log("----------");
+  console.log(process.env.NEXT_PUBLIC_PLATE_RECOGNIZER_KEY);
   const [imgData, setImgData] = useState(null);
   const [plateNumber, setPlateNumber] = useState("");
   const [registerDate, setRegisterDate] = useState("");
@@ -16,8 +18,8 @@ export default function checkNumberPlate() {
   useEffect(() => {
     //request_VehicleCheck();
     //request_Platebber(imgData);
-    console.log("----------");
-    console.log(process.env.NEXT_PUBLIC_PLATE_RECOGNIZER_KEY);
+    console.log("Use Effect called");
+    console.log("key", process.env.NEXT_PUBLIC_PLATE_RECOGNIZER_KEY);
     if (imgData) request_PlateRecognizer(imgData);
   }, [imgData]);
 
