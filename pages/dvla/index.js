@@ -160,7 +160,7 @@ export default function checkNumberPlate() {
     fetch("https://api.platerecognizer.com/v1/plate-reader/", {
       method: "POST",
       headers: {
-        Authorization: "Token ea0bf1239544fa0659cf6518052918dab10bac32",
+        Authorization: "Token 925de5e38a4e63269810ab02ec9fb9165054ef85", //ea0bf1239544fa0659cf6518052918dab10bac32",
       },
       body: body,
     })
