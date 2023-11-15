@@ -1,0 +1,13 @@
+{
+  "cctv": [
+    "https://s3-eu-west-1.amazonaws.com/jamcams.tfl.gov.uk/00001.03507.mp4",
+    "https://s3-eu-west-1.amazonaws.com/jamcams.tfl.gov.uk/00001.03505.mp4",
+    "https://s3-eu-west-1.amazonaws.com/jamcams.tfl.gov.uk/00001.03506.mp4",
+    "https://s3-eu-west-1.amazonaws.com/jamcams.tfl.gov.uk/00001.03540.mp4",
+    "https://s3-eu-west-1.amazonaws.com/jamcams.tfl.gov.uk/00001.03601.mp4",
+    "https://s3-eu-west-1.amazonaws.com/jamcams.tfl.gov.uk/00001.03609.mp4",
+    "https://s3-eu-west-1.amazonaws.com/jamcams.tfl.gov.uk/00001.03611.mp4",
+    "https://s3-eu-west-1.amazonaws.com/jamcams.tfl.gov.uk/00001.04226.mp4",
+    "https://s3-eu-west-1.amazonaws.com/jamcams.tfl.gov.uk/00001.06510.mp4"
+  ]
+}
