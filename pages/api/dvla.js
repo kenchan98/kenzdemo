@@ -8,7 +8,7 @@ export default async function request_dvla(req, res) {
       method: "post",
       url: "https://driver-vehicle-licensing.api.gov.uk/vehicle-enquiry/v1/vehicles",
       headers: {
-        "x-api-key": "iZQWpDapjy4n4DoL9Ulzm25D68rlHPFS6u3KyEag",
+        "x-api-key": process.env.DVLA_KEY, //"iZQWpDapjy4n4DoL9Ulzm25D68rlHPFS6u3KyEag",
         //"x-api-key": "HowYkRxFOQ196qWBr5H3AaqCzbcFWOgw82aB1N3M", //test server
         "Content-Type": "application/json",
       },
